@@ -12,7 +12,17 @@ const Showtimes = props => {
             disabled: disabled,
         })
 
-        return <li className={className} key={showtime}><a href={`/hall/${showtime}`}>{showtime}</a></li>
+        return (
+            <li className={className} key={showtime}>
+                {
+                    disabled && showtime
+                }
+                {
+                    !disabled &&
+                    <a href={`/hall/${showtime}`}>{showtime}</a>
+                }
+            </li>
+        )
     })
 
     return (

@@ -16,7 +16,11 @@
 
     &.disabled {
       background-color: gray;
-      cursor: text;
+
+      &:hover {
+         background-color: gray;
+         cursor: text;
+      }
     }
 
     &:hover {

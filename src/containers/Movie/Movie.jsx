@@ -36,7 +36,7 @@ export class Movie extends React.Component {
 
         const formattedDuration = getDurationHours(this.props.duration)
         return (
-            <div className="movie">
+            <div className="wrapper">
                 <Helmet>
                     <title>{this.props.title}</title>
                 </Helmet>

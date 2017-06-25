@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import classNames from 'classnames'
+import RaisedButton from 'material-ui/RaisedButton';
 
+import { requestMovie } from '../../state/actions/movie'
 import { requestHall } from '../../state/actions/hall'
 
 import './Hall.css'
@@ -14,6 +17,7 @@ class Hall extends Component {
         title: PropTypes.string.isRequired,
 
         requestHall: PropTypes.func.isRequired,
+        requestMovie: PropTypes.func.isRequired,
     }
     constructor(props) {
         super(props)
@@ -21,65 +25,101 @@ class Hall extends Component {
     }
     componentWillMount() {
         this.props.requestHall()
+        this.props.requestMovie()
     }
     getTicketsSum() {
         let sum = 0
         this.state.selected.forEach((ticket) => sum += ticket.price)
         return sum
     }
+    removeTicket(ticketId) {
+        this.setState({
+            selected: this.state.selected.filter((selectedItem) => selectedItem.id !== ticketId),
+        })
+    }
+    addTicket(row, sit) {
+        const id = `${row.number}_${sit.number}`
+        this.setState({
+            selected: [
+                ...this.state.selected,
+                {
+                    id,
+                    row: row.number,
+                    sit: sit.number,
+                    price: sit.price,
+                },
+            ],
+        })
+    }
     render() {
         if (this.props.loading) return null
 
         const handleBuy = () => {
+            console.log('buy')
         }
 
         const rows = this.props.rows.map((row) => {
             const sits = row.sits.map((sit) => {
+                const id = `${row.number}_${sit.number}`
+                const isChecked = this.state.selected.find((ticket) => ticket.id === id)
                 const handleOnClick = () => {
-                    this.setState({
-                        selected: [
-                            ...this.state.selected,
-                            {
-                                id: `${row.number}_${sit.number}`,
-                                row: row.number,
-                                sit: sit.number,
-                                price: sit.price,
-                            },
-                        ],
-                    })
+                    if (sit.booked) return
+                    if (isChecked) {
+                        this.removeTicket(id)
+                    } else {
+                        this.addTicket(row, sit)
+                    }
                 }
-                return <span className='sit' key={sit.number} onClick={handleOnClick}>{sit.number}</span>
+                const sitClassName = classNames('sit', {
+                    disabled: sit.booked,
+                    checked: isChecked,
+                })
+                return <span className={sitClassName} key={sit.number} onClick={handleOnClick}>{sit.number}</span>
             })
             return <div className='row' key={row.number}>{sits}</div>
         })
 
         const selected = this.state.selected.map((ticket) => {
-            const handleClear = () => {
-                this.setState({
-                    selected: this.state.selected.filter((selectedItem) => selectedItem.id !== ticket.id),
-                })
-            }
+            const handleClear = () => this.removeTicket(ticket.id)
             return (
-                <div key={`${ticket.row}_${ticket.sit}`}>
-                    {ticket.row} {ticket.sit} {ticket.price}
-                    <span onClick={handleClear}>{'clear'}</span>
+                <div className='totalRow' key={`${ticket.row}_${ticket.sit}`}>
+                    {'Row: '} <span className='number'>{ticket.row}</span>
+                    {'Place: '} <span className='number'>{ticket.sit}</span>
+                    {'Ticket: '} <span className='number'>{ticket.price}</span>
+                    <span className='remove' onClick={handleClear}>{'Remove'}</span>
                 </div>
             )
         })
         const ticketsSum = this.getTicketsSum()
         return (
             <div className='wrapper'>
-                <div className='hall'>
+                <div className='title'>
                     <h1>{this.props.title}</h1>
                     <h2>{moment().format('dddd, MMMM Do')}</h2>
+                </div>
+                <div className='hall'>
                     <div className='hallMap'>
                         <hr width='50%'/>
                         {'Screen'}
                         <div>{rows}</div>
-                        <div>{selected}</div>
-                        <div>{ticketsSum}</div>
-                        <div onClick={handleBuy}>{'Buy'}</div>
                     </div>
+                </div>
+                <div className='total'>
+                    <div>{selected}</div>
+                    {
+                        (ticketsSum > 0) &&
+                        <div className='sum'>
+                            {'Total: '}
+                            <span className='number'>{ticketsSum}</span>
+                        </div>
+                    }
+                    {
+                        (ticketsSum === 0) &&
+                        <div className='sum'>
+                            {'Please choose your sits.'}
+                        </div>
+                    }
+                    <RaisedButton label='Buy' primary onClick={handleBuy}/>
                 </div>
             </div>
         )
@@ -107,6 +147,7 @@ export const mapStateToProps = ({ hall, movie }) => {
 
 const mapDispatchToProps = {
     requestHall,
+    requestMovie,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hall)
