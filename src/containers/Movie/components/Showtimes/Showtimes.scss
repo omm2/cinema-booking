@@ -3,10 +3,16 @@
   list-style-type: none;
 
   li {
-    display: inline;
+    display: inline-block;
     margin-right: 0.25em;
     padding: 0.25em;
     border: 1px solid black;
+
+    a {
+      text-decoration: none;
+      color: black;
+      display: block;
+     }
 
     &.disabled {
       background-color: gray;

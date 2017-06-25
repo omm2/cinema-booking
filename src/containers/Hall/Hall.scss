@@ -1,0 +1,25 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+  grid-gap: 0.5em;
+}
+
+.hallMap {
+  text-align: center;
+}
+
+.row {
+  padding: 0.15em;
+  margin: 0.15em;
+
+  .sit {
+    border-radius: 2px;
+    padding: 0.25em;
+    border: 1px solid black;
+    margin: 0.15em;
+    width: 20px;
+    height: 24px;
+    line-height: 24px;
+  }
+}

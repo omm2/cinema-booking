@@ -12,13 +12,13 @@ const Showtimes = props => {
             disabled: disabled,
         })
 
-        return <a href={`/hall/${showtime}`} className={className} key={showtime}>{showtime}</a>
+        return <li className={className} key={showtime}><a href={`/hall/${showtime}`}>{showtime}</a></li>
     })
 
     return (
         <div>
             {`Today is ${moment().format('dddd, MMMM Do')}`}
-            <div className='showtimesTimetable'>{showtimes}</div>
+            <ul className='showtimesTimetable'>{showtimes}</ul>
         </div>
     )
 }
