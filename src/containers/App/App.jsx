@@ -10,7 +10,7 @@ class App extends Component {
         return (
             <MuiThemeProvider>
                 <Switch>
-                    <Route exact path={'/'} exact component={Movie} />
+                    <Route exact path={'/'} component={Movie} />
                     <Route path={'/hall/:id'} component={Hall} />
                 </Switch>
             </MuiThemeProvider>

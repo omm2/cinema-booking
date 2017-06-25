@@ -1,0 +1,21 @@
+.showtimesTimetable {
+  padding: 0;
+  list-style-type: none;
+
+  li {
+    display: inline;
+    margin-right: 0.25em;
+    padding: 0.25em;
+    border: 1px solid black;
+
+    &.disabled {
+      background-color: gray;
+      cursor: text;
+    }
+
+    &:hover {
+      background-color: yellow;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.movie {
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: 0.5em;
+}
+
+.movieSummary {
+  grid-row: 1 / 2;
+  grid-column: 1;
+}
+
+.moviePoster {
+  display: block;
+  max-width:400px;
+  max-height:400px;
+  width: auto;
+  height: auto;
+}
+
+.movieInfo {
+  grid-row: 2 / 3;
+  grid-column: 1;
+}
+
+.movieShowtimes {
+  grid-row: 3 / 4;
+  grid-column: 1;
+}
+
+.movieDescription {
+  grid-row: 4 / 5;
+  grid-column: 1;
+}

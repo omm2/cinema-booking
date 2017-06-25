@@ -8,9 +8,14 @@ const initialState = {
     loading: false,
     data: {
         id: 1,
-        name: null,
+        title: '',
+        poster: '',
         year: 0,
-        description: null,
+        duration: 0,
+        genres: [],
+        certificate: '',
+        description: '',
+        today: [],
     },
 }
 

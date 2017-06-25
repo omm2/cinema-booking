@@ -1,6 +1,11 @@
 {
   "id": 1,
-  "name": "Wonder Woman",
+  "title": "Wonder Woman",
+  "poster": "https://images-na.ssl-images-amazon.com/images/M/MV5BNDFmZjgyMTEtYTk5MC00NmY0LWJhZjktOWY2MzI5YjkzODNlXkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_SY1000_SX675_AL_.jpg",
   "year": 2017,
-  "description": "Before she was Wonder Woman she was Diana, princess of the Amazons, trained warrior. When a pilot crashes and tells of conflict in the outside world, she leaves home to fight a war to end all wars, discovering her full powers and true destiny."
+  "duration": 141,
+  "genres": ["Action", "Adventure", "Fantasy"],
+  "certificate": "12+",
+  "description": "Before she was Wonder Woman she was Diana, princess of the Amazons, trained warrior. When a pilot crashes and tells of conflict in the outside world, she leaves home to fight a war to end all wars, discovering her full powers and true destiny.",
+  "today": ["10:00", "16:15", "19:00", "21:00", "23:30"]
 }
