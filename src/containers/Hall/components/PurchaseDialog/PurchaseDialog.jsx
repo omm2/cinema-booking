@@ -18,7 +18,7 @@ class PurchaseDialog extends Component {
                 label='Submit'
                 primary
                 keyboardFocused
-                onTouchTap={this.handleClose}
+                onTouchTap={this.props.handleClose}
             />,
         ]
 
