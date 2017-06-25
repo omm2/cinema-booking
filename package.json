@@ -1,6 +1,9 @@
 {
-  "name": "my-app",
+  "name": "cinema-booking",
   "version": "0.1.0",
+  "engines": {
+    "node": "7.8.0"
+  },
   "private": true,
   "dependencies": {
     "react": "^15.6.1",
