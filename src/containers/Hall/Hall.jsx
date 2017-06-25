@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
-import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton'
 
 import { requestMovie } from '../../state/actions/movie'
 import { requestHall } from '../../state/actions/hall'
+import PurchaseDialog from './components/PurchaseDialog/PurchaseDialog'
 
 import './Hall.css'
 
@@ -21,7 +22,7 @@ class Hall extends Component {
     }
     constructor(props) {
         super(props)
-        this.state = { selected: [] }
+        this.state = { selected: [], purchaseDialogIsOpen: false }
     }
     componentWillMount() {
         this.props.requestHall()
@@ -54,8 +55,14 @@ class Hall extends Component {
     render() {
         if (this.props.loading) return null
 
+        const ticketsSum = this.getTicketsSum()
         const handleBuy = () => {
-            console.log('buy')
+            if (ticketsSum === 0) return
+            this.setState({ purchaseDialogIsOpen: true })
+        }
+
+        const handleClosePurchaseDialog = () => {
+            this.setState({ purchaseDialogIsOpen: false })
         }
 
         const rows = this.props.rows.map((row) => {
@@ -90,7 +97,6 @@ class Hall extends Component {
                 </div>
             )
         })
-        const ticketsSum = this.getTicketsSum()
         return (
             <div className='wrapper'>
                 <div className='title'>
@@ -119,8 +125,18 @@ class Hall extends Component {
                             {'Please choose your sits.'}
                         </div>
                     }
-                    <RaisedButton label='Buy' primary onClick={handleBuy}/>
+                    <RaisedButton
+                        disabled={ticketsSum === 0}
+                        label='Buy'
+                        primary
+                        onClick={handleBuy}
+                    />
                 </div>
+                <PurchaseDialog
+                    open={this.state.purchaseDialogIsOpen}
+                    handleClose={handleClosePurchaseDialog}
+                    sum={ticketsSum}
+                />
             </div>
         )
     }
