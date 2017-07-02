@@ -2,26 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
+import FlatButton from 'material-ui/FlatButton';
 
 import './Showtimes.css'
 
 const Showtimes = props => {
     const showtimes = props.showtimes.map((showtime) => {
         const disabled = moment(showtime, 'hh:mm').isBefore(moment())
-        const className = classNames({
-            disabled: disabled,
-        })
 
+        const props = {
+            key: showtime,
+            label: showtime,
+            disabled,
+            secondary: !disabled,
+            href: disabled ? '#' : `/hall/${showtime}`,
+        }
         return (
-            <li className={className} key={showtime}>
-                {
-                    disabled && showtime
-                }
-                {
-                    !disabled &&
-                    <a href={`/hall/${showtime}`}>{showtime}</a>
-                }
-            </li>
+            <FlatButton {...props} />
         )
     })
 
