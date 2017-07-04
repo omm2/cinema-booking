@@ -6,6 +6,8 @@ body {
   text-align: center;
   display: flex;
   flex-flow: row wrap;
+  width: 1400px;
+  margin: 0 auto;
 }
 
 .container > * {
@@ -16,44 +18,36 @@ body {
 .header {
   background: #4fc3f7;
   text-align: right;
+  padding: 10px;
 }
 
 .movieTitle {
-  font-family: 'Roboto Mono';
-  font-size: 24px;
+  font-size: 36px;
+  font-weight: bold;
+  font-weight: 700;
+  top: 510px;
+  left: 50px;
 }
 
 .footer {
   background: #0092c4;
   height: 30px;
+  padding: 10px;
+  text-align: center;
 }
 
 .trailer {
   flex: 3 1 0px;
-  width: 840px;
 }
 
 .main {
   flex: 2 1 0px;
   text-align: left;
-  width: 50%;
 
   dd {
     padding: 10px;
     font-weight: bold;
   }
-}
-
-.moviePosterWrapper {
-  flex: 1 1 0px;
-  padding: 0;
-}
-
-.moviePoster {
-  max-width:400px;
-  max-height:400px;
-  width: auto;
-  height: auto;
 }
 
 .description {
@@ -62,4 +56,10 @@ body {
 }
 
 .movieShowtimes {
+}
+
+.image {
+  max-width: 1400px;
+  width: auto;
+  height: auto;
 }

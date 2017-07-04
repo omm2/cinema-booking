@@ -16,6 +16,11 @@ const initialState = {
         certificate: '',
         description: '',
         today: [],
+        cast: '',
+        director: '',
+        language: '',
+        youtube: '',
+        images: [],
     },
 }
 

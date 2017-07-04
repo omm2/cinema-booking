@@ -11,5 +11,14 @@
   "language": "English",
   "director": "Patty Jenkins",
   "cast": "Gal Gadot, Chris Pine, Robin Wright",
-  "youtube": "https://www.youtube.com/embed/1Q8fG0TtVAY"
+  "youtube": "https://www.youtube.com/embed/1Q8fG0TtVAY",
+  "images": [
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMjQ2NzQ5MTQ5NV5BMl5BanBnXkFtZTgwMjQyOTYzMjI@._V1_SY1000_CR0,0,1499,1000_AL_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTYwMTU1MDk5NF5BMl5BanBnXkFtZTgwNDUyOTYzMjI@._V1_SX1777_CR0,0,1777,992_AL_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTc1ODUwMTYyM15BMl5BanBnXkFtZTgwNjYyOTYzMjI@._V1_SY1000_CR0,0,1499,1000_AL_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMjIwNjMyMzY2OF5BMl5BanBnXkFtZTgwODYyOTYzMjI@._V1_SX1500_CR0,0,1500,999_AL_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTEzNjU4NzgxNTReQTJeQWpwZ15BbWU4MDk2Mjk2MzIy._V1_SX1777_CR0,0,1777,986_AL_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUyMDc5MDczMV5BMl5BanBnXkFtZTgwMDcyOTYzMjI@._V1_SY1000_CR0,0,1504,1000_AL_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTY5Nzg4MjYyMF5BMl5BanBnXkFtZTgwNjMyOTYzMjI@._V1_SY1000_CR0,0,1499,1000_AL_.jpg"
+  ]
 }
