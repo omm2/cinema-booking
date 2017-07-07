@@ -15,7 +15,7 @@ const initialState = {
         genres: [],
         certificate: '',
         description: '',
-        today: [],
+        timetable: [[]],
         cast: '',
         director: '',
         language: '',

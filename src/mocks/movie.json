@@ -7,7 +7,33 @@
   "genres": ["Action", "Adventure", "Fantasy"],
   "certificate": "12+",
   "description": "Before she was Wonder Woman she was Diana, princess of the Amazons, trained warrior. When a pilot crashes and tells of conflict in the outside world, she leaves home to fight a war to end all wars, discovering her full powers and true destiny.",
-  "today": ["10:00", "16:15", "19:00", "21:00", "23:30"],
+  "timetable": [
+      [
+          {"name": "2d", "showtimes": ["12:00"]},
+          {"name": "3d", "showtimes": ["10:00", "16:15", "19:00", "21:00", "23:30"]},
+          {"name": "4d", "showtimes": ["11:20", "16:30", "20:00", "22:20", "23:30"]}
+      ],
+      [
+          {"name": "2d", "showtimes": ["12:00"]},
+          {"name": "3d", "showtimes": ["10:00", "16:15", "19:00", "21:00", "23:30"]},
+          {"name": "4d", "showtimes": ["11:20", "16:30", "20:00", "22:20", "23:30"]}
+      ],
+      [
+          {"name": "2d", "showtimes": ["12:00"]},
+          {"name": "3d", "showtimes": ["10:00", "16:15", "19:00", "21:00", "23:30"]},
+          {"name": "4d", "showtimes": ["11:20", "16:30", "20:00", "22:20", "23:30"]}
+      ],
+      [
+          {"name": "2d", "showtimes": ["12:00"]},
+          {"name": "3d", "showtimes": ["10:00", "16:15", "19:00", "21:00", "23:30"]},
+          {"name": "4d", "showtimes": ["11:20", "16:30", "20:00", "22:20", "23:30"]}
+      ],
+      [
+          {"name": "2d", "showtimes": ["12:00"]},
+          {"name": "3d", "showtimes": ["10:00", "16:15", "19:00", "21:00", "23:30"]},
+          {"name": "4d", "showtimes": ["11:20", "16:30", "20:00", "22:20", "23:30"]}
+      ]
+  ] ,
   "language": "English",
   "director": "Patty Jenkins",
   "cast": "Gal Gadot, Chris Pine, Robin Wright",
