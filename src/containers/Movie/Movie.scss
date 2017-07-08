@@ -1,5 +1,9 @@
 body {
   padding: 2em;
+
+  &.inTransition {
+    transition: transform 900ms ease;
+  }
 }
 
 .container {
@@ -30,7 +34,7 @@ body {
 
 .footer {
   background: #0092c4;
-  height: 30px;
+  height: 28px;
   padding: 10px;
   text-align: center;
 }
@@ -58,4 +62,16 @@ body {
   max-width: 1400px;
   width: auto;
   height: auto;
+}
+
+.scrollTop {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: fixed;
+  bottom: 0;
+  background: #fff;
+
+  &-isVisible {
+    opacity: 1;
+  }
 }

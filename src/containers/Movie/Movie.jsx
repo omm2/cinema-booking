@@ -16,6 +16,43 @@ const getDurationHours = (minutes) => {
     return `${duration.hours()}h ${duration.minutes()}m`
 }
 
+let scrollPosition = 0
+let ticking = false
+
+const toggleScrollTopElement = (scrollPos) => {
+    const scrollTopElement = document.getElementsByClassName('scrollTop')[0]
+    if (scrollTopElement.clientHeight < scrollPos) {
+        scrollTopElement.classList.add('scrollTop-isVisible')
+    } else {
+        scrollTopElement.classList.remove('scrollTop-isVisible')
+    }
+}
+
+const scrollTop = () => {
+    const body = document.body
+    const currentPosition = body.scrollTop
+
+    body.classList.add('inTransition')
+    body.style.transform = `translate(0, ${currentPosition}px)`
+
+    window.setTimeout(() => {
+        body.classList.remove('inTransition')
+        body.style.cssText = ''
+        window.scrollTo(0, 0)
+    }, 900)
+}
+
+window.addEventListener('scroll', () => {
+    scrollPosition = window.scrollY
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            toggleScrollTopElement(scrollPosition)
+            ticking = false
+        })
+    }
+    ticking = true
+})
+
 export class Movie extends React.Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
@@ -41,6 +78,9 @@ export class Movie extends React.Component {
         if (this.props.loading) return null
 
         const formattedDuration = getDurationHours(this.props.duration)
+        const cardProps = {
+            style: { height:'70px', width:'540px' },
+        }
 
         return (
             <div>
@@ -51,67 +91,74 @@ export class Movie extends React.Component {
                 <div className='container'>
                     <header className='movieTitle'>{`${this.props.title} (${this.props.year})`}</header>
                     <div className='trailer'>
-                        <iframe title='trailer' width="100%" height="540" src={this.props.youtube} frameBorder="0" allowFullScreen/>
+                        <iframe
+                            title='trailer'
+                            width='100%'
+                            height='540'
+                            src={this.props.youtube}
+                            frameBorder='0'
+                            allowFullScreen
+                        />
                     </div>
-
                     <div className='main'>
-                        <Card style={{ height:'25px', width:'540px', backgroundColor: '#4fc3f7' }}>
+                        <Card style={{ ...cardProps.style, height:'25px', backgroundColor: '#4fc3f7' }}>
                         </Card>
-                        <Card style={{ height:'70px', width:'540px', backgroundColor: '#e1e2e1' }}>
+                        <Card style={{ ...cardProps.style, backgroundColor: '#e1e2e1' }}>
                             <CardText>
                                 <dt>{'Director'}</dt>
                                 <dd>{this.props.director}</dd>
                             </CardText>
                         </Card>
-                        <Card style={{ height:'70px', width:'540px', backgroundColor: '#f5f5f6' }}>
+                        <Card style={{ ...cardProps.style, backgroundColor: '#f5f5f6' }}>
                             <CardText>
                                 <dt>{'Cast'}</dt>
                                 <dd>{this.props.cast}</dd>
                             </CardText>
                         </Card>
-                        <Card style={{ height:'70px', width:'540px', backgroundColor: '#e1e2e1' }}>
+                        <Card style={{ ...cardProps.style, backgroundColor: '#e1e2e1' }}>
                             <CardText>
                                 <dt>{'Language'}</dt>
                                 <dd>{this.props.language}</dd>
                             </CardText>
                         </Card>
-                        <Card style={{ height:'70px', width:'540px', backgroundColor: '#f5f5f6' }}>
+                        <Card style={{ ...cardProps.style, backgroundColor: '#f5f5f6' }}>
                             <CardText>
                                 <dt>{'Genres'}</dt>
                                 <dd>{this.props.genres.join(', ')}</dd>
                             </CardText>
                         </Card>
-                        <Card style={{ height:'70px', width:'540px', backgroundColor: '#e1e2e1' }}>
+                        <Card style={{ ...cardProps.style, backgroundColor: '#e1e2e1' }}>
                             <CardText>
                                 <dt>{'Duration'}</dt>
                                 <dd>{formattedDuration}</dd>
                             </CardText>
                         </Card>
-                        <Card style={{ height:'70px', width:'540px', 'background-color': '#f5f5f6' }}>
+                        <Card style={{ ...cardProps.style, backgroundColor: '#f5f5f6' }}>
                             <CardText>
                                 <dt>{'Year'}</dt>
                                 <dd>{this.props.year}</dd>
                             </CardText>
                         </Card>
-                        <Card style={{ height:'70px', width:'540px', 'background-color': '#e1e2e1' }}>
+                        <Card style={{ ...cardProps.style, backgroundColor: '#e1e2e1' }}>
                             <CardText>
                                 <dt>{'Certificate'}</dt>
                                 <dd>{this.props.certificate}</dd>
                             </CardText>
                         </Card>
-                        <Card style={{ height:'25px', width:'540px', 'background-color': '#4fc3f7' }}>
+                        <Card style={{ ...cardProps.style, height:'25px', backgroundColor: '#4fc3f7' }}>
                         </Card>
                     </div>
                     <Showtimes timetable={this.props.timetable}/>
                     <div className='description'>{this.props.description}</div>
                     {
                         this.props.images.map((image) => (
-                            <div className='imageWrapper' key={image}>
+                            <div key={image}>
                                 <img className='image' src={image} alt=''/>
                             </div>
                         ))
                     }
                 </div>
+                <i className='scrollTop material-icons md-48' onClick={scrollTop}>{'arrow_upward'}</i>
                 <footer className='footer'>
                     {'Thank you! Go grab a popcorn.'}
                 </footer>
