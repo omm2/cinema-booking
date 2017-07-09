@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet'
 import { Card, CardText } from 'material-ui/Card'
 
 import { requestMovie } from '../../state/actions/movie'
+import Header from '../../components/Header/Header'
 import Showtimes from './components/Showtimes/Showtimes'
 
 import './Movie.css'
@@ -21,6 +22,7 @@ let ticking = false
 
 const toggleScrollTopElement = (scrollPos) => {
     const scrollTopElement = document.getElementsByClassName('scrollTop')[0]
+    if (!scrollTopElement) return
     if (scrollTopElement.clientHeight < scrollPos) {
         scrollTopElement.classList.add('scrollTop-isVisible')
     } else {
@@ -87,7 +89,7 @@ export class Movie extends React.Component {
                 <Helmet>
                     <title>{this.props.title}</title>
                 </Helmet>
-                <header className='header'>{'AWESOME CINEMA'}</header>
+                <Header/>
                 <div className='container'>
                     <header className='movieTitle'>{`${this.props.title} (${this.props.year})`}</header>
                     <div className='trailer'>

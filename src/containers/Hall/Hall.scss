@@ -1,12 +1,18 @@
 .wrapper {
   padding: 0.5em;
   display: grid;
-  grid-template-columns: 65% 35%;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 50px auto;
   grid-gap: 0.5em;
 }
 
 .title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  font-weight: 700;
   grid-row: 1;
+  grid-column: 1 / 2;
   text-align: center;
 }
 
@@ -14,58 +20,122 @@
   grid-column: 1;
   grid-row: 2;
   text-align: center;
+  align-self: start;
+}
+
+hr {
+    border: 0;
+    border-top: 2px solid black;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.sit {
+  font-weight: bold;
+  color: #fff;
+  border-radius: 2px;
+  padding: 5px;
+  border: 1px solid #4fc2f7;
+  margin: 5px 5px 0 0;
+  width: 15px;
+  height: 25px;
+  line-height: 24px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+
+  &:hover{
+      background-color: #0092c4;
+  }
+
+  &-isChecked {
+    background-color: #4fc2f7;
+  }
+
+  &-isDisabled {
+    background-color: #e1e2e1;
+    cursor: text;
+    color: #000;
+
+    &:hover {
+        background-color: #e1e2e1;
+    }
+  }
 }
 
 .total {
   grid-column: 2;
-  grid-row: 2;
-}
+  grid-row: 1 / span 2;
 
-.row {
-  padding: 0.15em;
-  margin: 0.15em;
-}
-
-.sit {
-  border-radius: 2px;
-  padding: 0.25em;
-  border: 1px solid black;
-  margin: 0.15em;
-  width: 20px;
-  height: 24px;
-  line-height: 24px;
-  cursor: pointer;
-
-  &.checked {
-    background-color: #1aa3e0;
-    color: #fff;
+  p {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 5px 0 0;
   }
 
-  &.disabled {
-    background-color: #4F4F4F;
-    cursor: text;
-    color: #fff;
+  sub {
+    align-self: flex-end;
+    padding: 5px 5px 5px 0;
   }
 }
 
-.totalRow {
+.total-header {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.total-date {
+  font-weight: bold;
+}
+
+.total-type {
+  line-height: 32px;
+  padding: 0 6px;
+  border: 1px solid #4fc2f7;
+  margin: 8px 8px 0 0;
+  color: #959595;
+  width: 90px;
+  text-align: center;
+  span {
+      color: #000
+  }
+}
+
+.total-row {
+  display: flex;
+  align-items: center;
   background: #f5f5f5;
   margin: 5px 0 0 0;
-  padding: 0.25em 0.5em;
+  padding: 10px 15px;
+  width: 285px;
 }
 
-.number {
+.total-number {
+  flex: 0 1 30px;
   font-size: 28px;
+  font-weight: 700;
   line-height: 35px;
-  padding: 0 0.15em 0 0;
+  padding: 0 5px 0 0;
+
+  &-isHighlighted {
+    color: #4fc2f7;
+  }
 }
 
-.sum {
+.total-sum {
   margin: 0.25em 0.5em;
 }
 
-.remove {
+.total-remove {
   cursor: pointer;
+  flex: 0 1 30px;
+  padding: 5px 5px 5px 30px;
+  transition: color 0.5s ease;
+
+  &:hover{
+      color: #4fc2f7;
+  }
 }
-
-

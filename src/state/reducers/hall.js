@@ -7,6 +7,7 @@ import {
 const initialState = {
     loading: false,
     rows: [],
+    movie: {},
 }
 
 export default function hall(state = initialState, action = {}) {
@@ -21,7 +22,8 @@ export default function hall(state = initialState, action = {}) {
         return {
             ...state,
             loading: false,
-            rows: action.payload.data,
+            rows: action.payload.data.rows,
+            movie: action.payload.data.movie,
         }
     case HALL_ERROR:
         return {

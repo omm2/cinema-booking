@@ -19,16 +19,9 @@ body {
   flex: 1 1 100%;
 }
 
-.header {
-  background: #4fc3f7;
-  text-align: right;
-  padding: 10px;
-}
-
 .movieTitle {
   font-family: 'Nunito', sans-serif;
   font-size: 36px;
-  font-weight: bold;
   font-weight: 700;
 }
 
@@ -65,13 +58,19 @@ body {
 }
 
 .scrollTop {
+  cursor: pointer;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease,
+              background-color 0.5s ease;
   position: fixed;
   bottom: 0;
-  background: #fff;
+  background: #ffff00;
 
   &-isVisible {
     opacity: 1;
+  }
+
+  &:hover{
+      background: #fff;
   }
 }

@@ -4,9 +4,10 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
 import RaisedButton from 'material-ui/RaisedButton'
+import { Helmet } from 'react-helmet'
 
-import { requestMovie } from '../../state/actions/movie'
 import { requestHall } from '../../state/actions/hall'
+import Header from '../../components/Header/Header'
 import PurchaseDialog from './components/PurchaseDialog/PurchaseDialog'
 
 import './Hall.css'
@@ -14,11 +15,10 @@ import './Hall.css'
 class Hall extends Component {
     static propTypes = {
         rows: PropTypes.array.isRequired,
+        movie: PropTypes.object.isRequired,
         loading: PropTypes.bool.isRequired,
-        title: PropTypes.string.isRequired,
 
         requestHall: PropTypes.func.isRequired,
-        requestMovie: PropTypes.func.isRequired,
     }
     constructor(props) {
         super(props)
@@ -26,7 +26,6 @@ class Hall extends Component {
     }
     componentWillMount() {
         this.props.requestHall()
-        this.props.requestMovie()
     }
     getTicketsSum() {
         let sum = 0
@@ -56,6 +55,7 @@ class Hall extends Component {
         if (this.props.loading) return null
 
         const ticketsSum = this.getTicketsSum()
+        const ticketsNumber = this.state.selected.length
         const handleBuy = () => {
             if (ticketsSum === 0) return
             this.setState({ purchaseDialogIsOpen: true })
@@ -78,10 +78,10 @@ class Hall extends Component {
                     }
                 }
                 const sitClassName = classNames('sit', {
-                    disabled: sit.booked,
-                    checked: isChecked,
+                    'sit-isDisabled': sit.booked,
+                    'sit-isChecked': isChecked,
                 })
-                return <span className={sitClassName} key={sit.number} onClick={handleOnClick}>{sit.number}</span>
+                return <div className={sitClassName} key={sit.number} onClick={handleOnClick}>{sit.number}</div>
             })
             return <div className='row' key={row.number}>{sits}</div>
         })
@@ -89,81 +89,83 @@ class Hall extends Component {
         const selected = this.state.selected.map((ticket) => {
             const handleClear = () => this.removeTicket(ticket.id)
             return (
-                <div className='totalRow' key={`${ticket.row}_${ticket.sit}`}>
-                    {'Row: '} <span className='number'>{ticket.row}</span>
-                    {'Place: '} <span className='number'>{ticket.sit}</span>
-                    {'Ticket: '} <span className='number'>{ticket.price}</span>
-                    <span className='remove' onClick={handleClear}>{'Remove'}</span>
+                <div className='total-row' key={`${ticket.row}_${ticket.sit}`}>
+                    <sub>{'Row: '}</sub> <span className='total-number'>{ticket.row}</span>
+                    <sub>{'Place: '}</sub> <span className='total-number'>{ticket.sit}</span>
+                    <sub>{'Price: '}</sub> <span className='total-number total-number-isHighlighted'>
+                        {`€${ticket.price}`}
+                    </span>
+                    <i className='material-icons total-remove' onClick={handleClear}>{'cancel'}</i>
                 </div>
             )
         })
         return (
-            <div className='wrapper'>
-                <div className='title'>
-                    <h1>{this.props.title}</h1>
-                    <h2>{moment().format('dddd, MMMM Do')}</h2>
-                </div>
-                <div className='hall'>
-                    <div className='hallMap'>
+            <div>
+                <Helmet>
+                    <title>{this.props.movie.title}</title>
+                </Helmet>
+                <Header/>
+                <div className='wrapper'>
+                    <header className='title'>{this.props.movie.title}</header>
+                    <div className='hall'>
                         <hr width='50%'/>
                         {'Screen'}
                         <div>{rows}</div>
                     </div>
-                </div>
-                <div className='total'>
-                    <div>{selected}</div>
-                    {
-                        (ticketsSum > 0) &&
-                        <div className='sum'>
-                            {'Total: '}
-                            <span className='number'>{ticketsSum}</span>
-                        </div>
-                    }
-                    {
-                        (ticketsSum === 0) &&
-                        <div className='sum'>
-                            {'Please choose your sits.'}
-                        </div>
-                    }
-                    <RaisedButton
-                        disabled={ticketsSum === 0}
-                        label='Buy'
-                        primary
-                        onClick={handleBuy}
+                    <div className='total'>
+                        <div className='total-header'>{this.props.movie.title}</div>
+                        <div className='total-date'>{moment(this.props.movie.date).format('dddd, MMMM Do')}</div>
+                        <div className='total-type'>{'Format: '}<span>{this.props.movie.type}</span></div>
+                        {
+                            (ticketsSum === 0) &&
+                            <p>{'Please choose your sits.'}</p>
+                        }
+                        {
+                            (ticketsSum > 0) &&
+                            <p>{`${ticketsNumber} ${ticketsNumber === 1 ? 'ticket' : 'tickets'}`}</p>
+                        }
+                        <div>{selected}</div>
+                        {
+                            (ticketsSum > 0) &&
+                            <p>
+                                {'Total: '}
+                                <span className='total-number total-number-isHighlighted'>{`€${ticketsSum}`}</span>
+                            </p>
+                        }
+                        <RaisedButton
+                            disabled={ticketsSum === 0}
+                            label='Buy'
+                            primary
+                            onClick={handleBuy}
+                        />
+                    </div>
+                    <PurchaseDialog
+                        open={this.state.purchaseDialogIsOpen}
+                        handleClose={handleClosePurchaseDialog}
+                        sum={ticketsSum}
                     />
                 </div>
-                <PurchaseDialog
-                    open={this.state.purchaseDialogIsOpen}
-                    handleClose={handleClosePurchaseDialog}
-                    sum={ticketsSum}
-                />
             </div>
         )
     }
 }
 
-export const mapStateToProps = ({ hall, movie }) => {
+export const mapStateToProps = ({ hall }) => {
     const {
+        movie,
         rows,
         loading,
     } = hall
 
-    const {
-        data: {
-            title,
-        },
-    } = movie
-
     return {
         rows,
+        movie,
         loading,
-        title,
     }
 }
 
 const mapDispatchToProps = {
     requestHall,
-    requestMovie,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hall)

@@ -53,7 +53,7 @@ class PurchaseDialog extends Component {
 }
 
 PurchaseDialog.propTypes = {
-    open: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
     sum: PropTypes.number.isRequired,
 }
