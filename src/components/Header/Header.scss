@@ -1,6 +1,28 @@
 .header {
+  display: flex;
   background: #4fc3f7;
-  text-align: right;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.header-item {
+  color: #fff;
+  text-transform: uppercase;
+  margin-right: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+
+  &:hover{
+      background-color: #0092c4;
+  }
+}
+
+.header-item-main {
+  border: 1px solid #8bf6ff;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
   padding: 10px;
 }
 
