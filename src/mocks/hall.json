@@ -9,7 +9,7 @@
     "rows": [
       {
         "number": 1,
-        "sits": [
+        "seats": [
           {
             "number": 1,
             "price": 22,
@@ -74,7 +74,7 @@
       },
       {
         "number": 2,
-        "sits": [
+        "seats": [
           {
             "number": 1,
             "price": 22,
@@ -139,7 +139,7 @@
       },
       {
         "number": 3,
-        "sits": [
+        "seats": [
           {
             "number": 1,
             "price": 22,
@@ -204,7 +204,7 @@
       },
       {
         "number": 4,
-        "sits": [
+        "seats": [
           {
             "number": 1,
             "price": 22,
@@ -269,7 +269,7 @@
       },
       {
         "number": 5,
-        "sits": [
+        "seats": [
           {
             "number": 1,
             "price": 22,
@@ -334,7 +334,7 @@
       },
       {
         "number": 6,
-        "sits": [
+        "seats": [
           {
             "number": 1,
             "price": 22,
@@ -399,7 +399,7 @@
       },
       {
         "number": 7,
-        "sits": [
+        "seats": [
           {
             "number": 1,
             "price": 22,

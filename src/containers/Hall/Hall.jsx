@@ -12,6 +12,8 @@ import PurchaseDialog from './components/PurchaseDialog/PurchaseDialog'
 
 import './Hall.css'
 
+const TRANSITION_TIMEOUT = 500
+
 class Hall extends Component {
     static propTypes = {
         rows: PropTypes.array.isRequired,
@@ -33,9 +35,17 @@ class Hall extends Component {
         return sum
     }
     removeTicket(ticketId) {
-        this.setState({
-            selected: this.state.selected.filter((selectedItem) => selectedItem.id !== ticketId),
-        })
+        const rowEl = this.refs['row-' + ticketId]
+        rowEl.classList.add('total-row-inTransition')
+        while (rowEl.hasChildNodes()) {
+            rowEl.removeChild(rowEl.lastChild)
+        }
+        window.setTimeout(() => {
+            rowEl.classList.remove('inTransition')
+            this.setState({
+                selected: this.state.selected.filter((selectedItem) => selectedItem.id !== ticketId),
+            })
+        }, TRANSITION_TIMEOUT)
     }
     addTicket(row, sit) {
         const id = `${row.number}_${sit.number}`
@@ -50,6 +60,10 @@ class Hall extends Component {
                 },
             ],
         })
+        window.setTimeout(() => {
+            const rowEl = this.refs['row-' + id]
+            rowEl.classList.remove('total-row-inTransition')
+        }, 0)
     }
     render() {
         if (this.props.loading) return null
@@ -66,7 +80,7 @@ class Hall extends Component {
         }
 
         const rows = this.props.rows.map((row) => {
-            const sits = row.sits.map((sit) => {
+            const seats = row.seats.map((sit) => {
                 const id = `${row.number}_${sit.number}`
                 const isChecked = this.state.selected.find((ticket) => ticket.id === id)
                 const handleOnClick = () => {
@@ -83,13 +97,18 @@ class Hall extends Component {
                 })
                 return <div className={sitClassName} key={sit.number} onClick={handleOnClick}>{sit.number}</div>
             })
-            return <div className='row' key={row.number}>{sits}</div>
+            return <div className='row' key={row.number}>{seats}</div>
         })
 
         const selected = this.state.selected.map((ticket) => {
-            const handleClear = () => this.removeTicket(ticket.id)
+            const handleClear = () => {
+                this.removeTicket(ticket.id)
+            }
             return (
-                <div className='total-row' key={`${ticket.row}_${ticket.sit}`}>
+                <div className='total-row total-row-inTransition'
+                    key={`${ticket.row}_${ticket.sit}`}
+                    ref={'row-' + ticket.id}
+                >
                     <sub>{'Row: '}</sub> <span className='total-number'>{ticket.row}</span>
                     <sub>{'Place: '}</sub> <span className='total-number'>{ticket.sit}</span>
                     <sub>{'Price: '}</sub> <span className='total-number total-number-isHighlighted'>
@@ -106,19 +125,21 @@ class Hall extends Component {
                 </Helmet>
                 <Header/>
                 <div className='wrapper'>
-                    <header className='title'>{this.props.movie.title}</header>
+                    <header className='title'>
+                        {this.props.movie.title}
+                    </header>
                     <div className='hall'>
                         <hr width='50%'/>
                         {'Screen'}
                         <div>{rows}</div>
                     </div>
                     <div className='total'>
-                        <div className='total-header'>{this.props.movie.title}</div>
+                        <div className='total-header'><a href='/'>{this.props.movie.title}</a></div>
                         <div className='total-date'>{moment(this.props.movie.date).format('dddd, MMMM Do')}</div>
                         <div className='total-type'>{'Format: '}<span>{this.props.movie.type}</span></div>
                         {
                             (ticketsSum === 0) &&
-                            <p>{'Please choose your sits.'}</p>
+                            <p>{'Please choose your seats.'}</p>
                         }
                         {
                             (ticketsSum > 0) &&

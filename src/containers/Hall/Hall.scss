@@ -85,6 +85,26 @@ hr {
 .total-header {
   font-size: 24px;
   font-weight: bold;
+
+  a:link {
+    color: #4fc3f7;
+    text-decoration: underline;
+  }
+
+  a:visited {
+    color: #4fc3f7;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #0092c4;
+    text-decoration: underline;
+  }
+
+  a:active {
+    color: #4fc3f7;
+    text-decoration: none;
+  }
 }
 
 .total-date {
@@ -110,7 +130,18 @@ hr {
   background: #f5f5f5;
   margin: 5px 0 0 0;
   padding: 10px 15px;
+  transition: opacity 500ms ease, height 500ms ease;
   width: 285px;
+  height: 35px;
+  opacity: 1;
+
+  &-inTransition {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    width: 315px;
+  }
 }
 
 .total-number {
