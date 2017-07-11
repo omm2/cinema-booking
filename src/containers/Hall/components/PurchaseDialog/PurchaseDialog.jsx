@@ -4,6 +4,8 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
+import './PurchaseDialog.css'
+
 class PurchaseDialog extends Component {
     render() {
         const actions = [
@@ -22,6 +24,10 @@ class PurchaseDialog extends Component {
             />,
         ]
 
+        const dialogStyle = {
+            maxWidth: '400px',
+            margin: '0 auto',
+        }
         return (
             <Dialog
                 title='Enter credit card info to buy tickets'
@@ -29,8 +35,8 @@ class PurchaseDialog extends Component {
                 modal
                 open={this.props.open}
                 onRequestClose={this.handleClose}
+                contentStyle={dialogStyle}
             >
-                <h2>{`You will be charged $${this.props.sum} after buying the tickets`}</h2>
                 <TextField
                     floatingLabelText='Card Number'
                     floatingLabelFixed
@@ -47,6 +53,11 @@ class PurchaseDialog extends Component {
                     floatingLabelText='CCV'
                     floatingLabelFixed
                 /><br />
+                <div className={'notice'}>
+                    {'You will be charged '}
+                     <span className='total-number total-number-isHighlighted'>{`€${this.props.sum}`}</span>
+                     {' after buying the tickets'}
+                 </div>
             </Dialog>
         )
     }
