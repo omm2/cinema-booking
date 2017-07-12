@@ -129,9 +129,11 @@ class Hall extends Component {
                         {this.props.movie.title}
                     </header>
                     <div className='hall'>
-                        <hr width='50%'/>
+                        <hr className={'hall-screen'} width='50%'/>
                         {'Screen'}
                         <div>{rows}</div>
+                        <hr className={'hall-exit'} width='15%'/>
+                        <span className={'hall-exitLabel'}>{'Exit'}</span>
                     </div>
                     <div className='total'>
                         <div className='total-header'><a href='/'>{this.props.movie.title}</a></div>

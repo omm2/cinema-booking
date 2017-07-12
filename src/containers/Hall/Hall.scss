@@ -23,9 +23,21 @@
   align-self: start;
 }
 
-hr {
-    border: 0;
-    border-top: 2px solid black;
+.hall-screen {
+  border: 0;
+  border-top: 2px solid black;
+}
+
+.hall-exitLabel {
+  font-weight: bold;
+  text-align: right;
+  color: #4fc2f7
+}
+
+.hall-exit {
+  border: 0;
+  border-top: 2px solid #4fc2f7;
+  margin-top: 15px;
 }
 
 .row {
