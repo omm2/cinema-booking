@@ -4,11 +4,14 @@
   margin: 0 auto;
 }
 
+.showtimes-day {
+  padding: 25px 0 0 0;
+}
+
 .showtimes-typeLine {
   width: 100%;
   margin: 0 auto;
   display: flex;
-  flex-flow: row wrap;
 }
 
 .showtimes-typeLine > * {
@@ -20,4 +23,23 @@
   flex: 0 0 50px;
   font-weight: bold;
   width: 50px;
+  align-self: center;
+}
+
+.showtimes-button {
+  margin: 0 12px
+}
+
+@media screen and (max-width: 720px) {
+  .showtimes-lines {
+    display: flex;
+  }
+  .showtimes-typeLine {
+    flex-direction: column;
+  }
+
+  .showtimes-type {
+    flex: 0 0 25px;
+    height: 25px;
+  }
 }

@@ -56,10 +56,12 @@ class Showtimes extends Component {
                 href: disabled ? '#' : `/hall/${showtime}`,
                 backgroundColor: disabled ? '#e1e2e1' : '#4fc3f7',
                 hoverColor: '#0093c4',
-                style: { color: '#fff', margin: '5px 12px' },
+                style: { color: '#fff' },
             }
             return (
-                <FlatButton {...props} key={`${showtime}_${day}_${type}`}/>
+                <div key={`${showtime}_${day}_${type}`} className={'showtimes-button'}>
+                    <FlatButton {...props}/>
+                </div>
             )
         })
     }
@@ -69,14 +71,16 @@ class Showtimes extends Component {
         const timetable = days.map(({ date, dayTimetable }) => (
             <div className='showtimes-day' key={date.format()}>
                 {date.format('dddd, MMMM Do')}
-                {
-                    dayTimetable.map((type) => (
-                        <div className='showtimes-typeLine' key={`${type.name}_${date.format()}`}>
-                            <div className='showtimes-type'>{type.name}</div>
-                            {this.getShowtimes(type.showtimes, type.name, date.format())}
-                        </div>
-                    ))
-                }
+                <div className='showtimes-lines'>
+                    {
+                        dayTimetable.map((type) => (
+                            <div className='showtimes-typeLine' key={`${type.name}_${date.format()}`}>
+                                <div className='showtimes-type'>{type.name}</div>
+                                {this.getShowtimes(type.showtimes, type.name, date.format())}
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         ))
 

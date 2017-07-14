@@ -35,11 +35,21 @@ body {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
   text-align: left;
+  padding: 25px 0 25px 10px;
+}
 
-  dd {
-    padding: 10px;
-    font-weight: bold;
-  }
+.card {
+  height: 69px;
+  width: 620px;
+  text-transform: uppercase;
+  line-height: 69px;
+  border-bottom: 1px solid #e1e2e1;
+}
+
+.card-label {
+  padding: 10px;
+  font-weight: bold;
+  width: 100px;
 }
 
 .showtimes {
@@ -56,6 +66,17 @@ body {
   font-size: 18px;
   text-align: left;
   height: 100%;
+  line-height: 35px;
+}
+
+.images {
+  grid-column: 1 / span 2;
+  grid-row: 5 / 6;
+  justify-self: center;
+}
+
+.poster {
+  display: none;
 }
 
 @media screen and (max-width: 1440px) {
@@ -66,28 +87,59 @@ body {
     }
 
     .trailer {
-      grid-column: 1 / span 2;
+      grid-column: 1;
       grid-row: 2 / 3;
     }
 
     .main {
-      grid-column: 1 / span 2;
+      text-align: center;
+      grid-column: 1;
       grid-row: 5 / 6;
       justify-self: center;
+      padding: 10px 0;
     }
 
     .showtimes {
-      grid-column: 1 / span 2;
+      grid-column: 1;
       grid-row: 3 / 4;
       font-size: 18px;
       height: 100%;
     }
 
     .description {
-      grid-column: 1 / span 2;
+      grid-column: 1;
       grid-row: 4 / 5;
       font-size: 18px;
       height: 100%;
+    }
+
+    .poster {
+      display: none;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .trailer {
+      display: none;
+    }
+
+    .images {
+      display: none;
+    }
+
+    .poster {
+      grid-column: 1;
+      grid-row: 2 / 3;
+      display: block;
+      justify-self: center;
+    }
+
+    .card {
+      height: 69px;
+      width: 100%;
+      text-transform: uppercase;
+      line-height: 69px;
+      border-bottom: 1px solid #e1e2e1;
     }
 }
 
@@ -96,7 +148,14 @@ body {
   max-width: 1440px;
   width: 100%;
   height: auto;
-  margin: 0 auto;
+  margin: 10px auto 0;
+}
+
+.poster-image {
+  display: block;
+  width: 300px;
+  height: auto;
+  margin: 10px auto 0;
 }
 
 .scrollTop {

@@ -69,6 +69,7 @@ export class Movie extends React.Component {
         director: PropTypes.string.isRequired,
         language: PropTypes.string.isRequired,
         youtube: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
         images: PropTypes.array.isRequired,
 
         requestMovie: PropTypes.func.isRequired,
@@ -76,14 +77,18 @@ export class Movie extends React.Component {
     componentWillMount() {
         this.props.requestMovie()
     }
+    renderCard(label, value) {
+        return (
+            <div className={'card'}>
+                <span className={'card-label'}>{label}</span>
+                <span className={'card-value'}>{value}</span>
+            </div>
+        )
+    }
     render() {
         if (this.props.loading) return null
 
         const formattedDuration = getDurationHours(this.props.duration)
-        const cardProps = {
-            style: { height:'70px', width:'620px' },
-        }
-
         return (
             <div>
                 <Helmet>
@@ -97,70 +102,37 @@ export class Movie extends React.Component {
                             title='trailer'
                             width='100%'
                             height='540'
-                            src={this.props.youtube}
+                            src={`${this.props.youtube}?rel=0&controls=0&showinfo=0`}
                             frameBorder='0'
                             allowFullScreen
                         />
                     </div>
+                    <div className='poster'>
+                        <img className='poster-image' src={this.props.poster} alt={this.props.title}/>
+                    </div>
                     <div className='main'>
-                        <Card style={{ ...cardProps.style, height:'25px', backgroundColor: '#4fc3f7' }}>
-                        </Card>
-                        <Card style={{ ...cardProps.style, backgroundColor: '#e1e2e1' }}>
-                            <CardText>
-                                <dt>{'Director'}</dt>
-                                <dd>{this.props.director}</dd>
-                            </CardText>
-                        </Card>
-                        <Card style={{ ...cardProps.style, backgroundColor: '#f5f5f6' }}>
-                            <CardText>
-                                <dt>{'Cast'}</dt>
-                                <dd>{this.props.cast}</dd>
-                            </CardText>
-                        </Card>
-                        <Card style={{ ...cardProps.style, backgroundColor: '#e1e2e1' }}>
-                            <CardText>
-                                <dt>{'Language'}</dt>
-                                <dd>{this.props.language}</dd>
-                            </CardText>
-                        </Card>
-                        <Card style={{ ...cardProps.style, backgroundColor: '#f5f5f6' }}>
-                            <CardText>
-                                <dt>{'Genres'}</dt>
-                                <dd>{this.props.genres.join(', ')}</dd>
-                            </CardText>
-                        </Card>
-                        <Card style={{ ...cardProps.style, backgroundColor: '#e1e2e1' }}>
-                            <CardText>
-                                <dt>{'Duration'}</dt>
-                                <dd>{formattedDuration}</dd>
-                            </CardText>
-                        </Card>
-                        <Card style={{ ...cardProps.style, backgroundColor: '#f5f5f6' }}>
-                            <CardText>
-                                <dt>{'Year'}</dt>
-                                <dd>{this.props.year}</dd>
-                            </CardText>
-                        </Card>
-                        <Card style={{ ...cardProps.style, backgroundColor: '#e1e2e1' }}>
-                            <CardText>
-                                <dt>{'Certificate'}</dt>
-                                <dd>{this.props.certificate}</dd>
-                            </CardText>
-                        </Card>
-                        <Card style={{ ...cardProps.style, height:'25px', backgroundColor: '#4fc3f7' }}>
-                        </Card>
+                        {this.renderCard('Director:', this.props.director)}
+                        {this.renderCard('Cast:', this.props.cast)}
+                        {this.renderCard('Language:', this.props.language)}
+                        {this.renderCard('Genres:', this.props.genres.join(', '))}
+                        {this.renderCard('Duration:', formattedDuration)}
+                        {this.renderCard('Year:', this.props.year)}
+                        {this.renderCard('Certificate:', this.props.certificate)}
                     </div>
                     <div className={'showtimes'}>
                         <Showtimes timetable={this.props.timetable}/>
                     </div>
                     <div className='description'>{this.props.description}</div>
+                    <div className={'images'}>
+                    {
+                        this.props.images.map((image) => (
+                            <img key={image} className='image' src={image} alt={this.props.title}/>
+                        ))
+                    }
+                    </div>
                 </div>
                 <i className='scrollTop material-icons md-48' onClick={scrollTop}>{'arrow_upward'}</i>
-                {
-                    this.props.images.map((image) => (
-                        <img key={image} className='image' src={image} alt=''/>
-                    ))
-                }
+
                 <footer className='footer'>
                     {'Thank you! Go grab a popcorn.'}
                 </footer>
