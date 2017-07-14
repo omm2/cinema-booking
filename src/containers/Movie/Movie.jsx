@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { Helmet } from 'react-helmet'
 
-import { Card, CardText } from 'material-ui/Card'
-
 import { requestMovie } from '../../state/actions/movie'
 import Header from '../../components/Header/Header'
 import Showtimes from './components/Showtimes/Showtimes'
