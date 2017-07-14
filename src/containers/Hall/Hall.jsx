@@ -126,7 +126,7 @@ class Hall extends Component {
                 <Header/>
                 <div className='wrapper'>
                     <header className='title'>
-                        {this.props.movie.title}
+                        {`${this.props.movie.title} (${this.props.movie.certificate})`}
                     </header>
                     <div className='hall'>
                         <hr className={'hall-screen'} width='50%'/>
@@ -136,7 +136,9 @@ class Hall extends Component {
                         <span className={'hall-exitLabel'}>{'Exit'}</span>
                     </div>
                     <div className='total'>
-                        <div className='total-header'><a href='/'>{this.props.movie.title}</a></div>
+                        <div className='total-header'>
+                            <a href='/'>{`${this.props.movie.title} (${this.props.movie.certificate})`}</a>
+                        </div>
                         <div className='total-date'>{moment(this.props.movie.date).format('dddd, MMMM Do')}</div>
                         <div className='total-type'>{'Format: '}<span>{this.props.movie.type}</span></div>
                         {
@@ -160,6 +162,7 @@ class Hall extends Component {
                             label='Buy'
                             primary
                             onClick={handleBuy}
+                            buttonStyle={{width: '104px'}}
                         />
                     </div>
                     <PurchaseDialog

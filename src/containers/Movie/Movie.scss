@@ -113,6 +113,12 @@ body {
       height: 100%;
     }
 
+    .images {
+      grid-column: 1 / span 2;
+      grid-row: 6 / 7;
+      justify-self: center;
+    }
+
     .poster {
       display: none;
     }

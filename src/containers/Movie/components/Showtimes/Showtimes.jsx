@@ -47,19 +47,19 @@ class Showtimes extends Component {
 
     getShowtimes(showtimes, type, day) {
         return showtimes.map((showtime) => {
-            const disabled = moment(showtime, 'hh:mm').isBefore(moment())
+            const disabled = moment(showtime.time, 'hh:mm').isBefore(moment())
 
             const props = {
-                label: showtime,
+                label: showtime.time,
                 disabled,
                 secondary: !disabled,
-                href: disabled ? '#' : `/hall/${showtime}`,
+                href: disabled ? '#' : `/hall/${showtime.id}`,
                 backgroundColor: disabled ? '#e1e2e1' : '#4fc3f7',
                 hoverColor: '#0093c4',
                 style: { color: '#fff' },
             }
             return (
-                <div key={`${showtime}_${day}_${type}`} className={'showtimes-button'}>
+                <div key={`${showtime.time}_${day}_${type}`} className={'showtimes-button'}>
                     <FlatButton {...props}/>
                 </div>
             )
