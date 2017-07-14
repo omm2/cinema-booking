@@ -67,12 +67,12 @@ class Showtimes extends Component {
     render() {
         const days = this.getDays()
         const timetable = days.map(({ date, dayTimetable }) => (
-            <div className='day' key={date.format()}>
+            <div className='showtimes-day' key={date.format()}>
                 {date.format('dddd, MMMM Do')}
                 {
                     dayTimetable.map((type) => (
-                        <div className='typeLine' key={`${type.name}_${date.format()}`}>
-                            <div className='type'>{type.name}</div>
+                        <div className='showtimes-typeLine' key={`${type.name}_${date.format()}`}>
+                            <div className='showtimes-type'>{type.name}</div>
                             {this.getShowtimes(type.showtimes, type.name, date.format())}
                         </div>
                     ))
@@ -89,8 +89,8 @@ class Showtimes extends Component {
         })
 
         return (
-            <div className='container'>
-                <div className='filter'>
+            <div className='showtimes-container'>
+                <div className='showtimes-filter'>
                     <RaisedButton label='Today' {...getButtonProps('today')} />
                     <RaisedButton label='Tomorrow' {...getButtonProps('tomorrow')} />
                     <RaisedButton label='Week' {...getButtonProps('week')} />

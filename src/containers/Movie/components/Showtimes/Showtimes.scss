@@ -1,23 +1,23 @@
-.container {
+.showtimes-container {
   padding: 0;
-  width: 1400px;
+  width: 100%;
   margin: 0 auto;
 }
 
-.typeLine {
-  width: 800px;
+.showtimes-typeLine {
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
 }
 
-.typeLine > * {
-  padding: 10px;
+.showtimes-typeLine > * {
+  padding: 10px 0;
   flex: 0 0 25px;
 }
 
-.type {
-  flex: 0 0 100px;
+.showtimes-type {
+  flex: 0 0 50px;
   font-weight: bold;
-  width: 100px;
+  width: 50px;
 }

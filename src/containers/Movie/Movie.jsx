@@ -81,7 +81,7 @@ export class Movie extends React.Component {
 
         const formattedDuration = getDurationHours(this.props.duration)
         const cardProps = {
-            style: { height:'70px', width:'540px' },
+            style: { height:'70px', width:'620px' },
         }
 
         return (
@@ -150,17 +150,17 @@ export class Movie extends React.Component {
                         <Card style={{ ...cardProps.style, height:'25px', backgroundColor: '#4fc3f7' }}>
                         </Card>
                     </div>
-                    <Showtimes timetable={this.props.timetable}/>
+                    <div className={'showtimes'}>
+                        <Showtimes timetable={this.props.timetable}/>
+                    </div>
                     <div className='description'>{this.props.description}</div>
-                    {
-                        this.props.images.map((image) => (
-                            <div key={image}>
-                                <img className='image' src={image} alt=''/>
-                            </div>
-                        ))
-                    }
                 </div>
                 <i className='scrollTop material-icons md-48' onClick={scrollTop}>{'arrow_upward'}</i>
+                {
+                    this.props.images.map((image) => (
+                        <img key={image} className='image' src={image} alt=''/>
+                    ))
+                }
                 <footer className='footer'>
                     {'Thank you! Go grab a popcorn.'}
                 </footer>

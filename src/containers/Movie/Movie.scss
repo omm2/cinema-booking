@@ -8,36 +8,32 @@ body {
 
 .container {
   text-align: center;
-  display: flex;
-  flex-flow: row wrap;
-  width: 1400px;
+  display: grid;
+  grid-template-columns: 800px 640px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
 .container > * {
   padding: 10px;
-  flex: 1 1 100%;
 }
 
 .movieTitle {
   font-family: 'Nunito', sans-serif;
   font-size: 36px;
   font-weight: 700;
-}
-
-.footer {
-  background: #0092c4;
-  height: 28px;
-  padding: 10px;
-  text-align: center;
+  grid-column: 1 / span 2;
+  grid-row: 1 / 2;
 }
 
 .trailer {
-  flex: 3 1 0px;
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
 }
 
 .main {
-  flex: 2 1 0px;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
   text-align: left;
 
   dd {
@@ -46,16 +42,61 @@ body {
   }
 }
 
-.description {
+.showtimes {
+  grid-column: 1 / span 2;
+  grid-row: 3 / 4;
   font-size: 18px;
-  flex: 1 3 0px;
+  height: 100%;
+  justify-self: center;
+}
+
+.description {
+  grid-column: 1 / span 2;
+  grid-row: 4 / 5;
+  font-size: 18px;
+  text-align: left;
   height: 100%;
 }
 
+@media screen and (max-width: 1440px) {
+    .container {
+      text-align: center;
+      display: grid;
+      grid-template-columns: auto;
+    }
+
+    .trailer {
+      grid-column: 1 / span 2;
+      grid-row: 2 / 3;
+    }
+
+    .main {
+      grid-column: 1 / span 2;
+      grid-row: 5 / 6;
+      justify-self: center;
+    }
+
+    .showtimes {
+      grid-column: 1 / span 2;
+      grid-row: 3 / 4;
+      font-size: 18px;
+      height: 100%;
+    }
+
+    .description {
+      grid-column: 1 / span 2;
+      grid-row: 4 / 5;
+      font-size: 18px;
+      height: 100%;
+    }
+}
+
 .image {
-  max-width: 1400px;
-  width: auto;
+  display: block;
+  max-width: 1440px;
+  width: 100%;
   height: auto;
+  margin: 0 auto;
 }
 
 .scrollTop {
@@ -74,4 +115,11 @@ body {
   &:hover{
       background: #fff;
   }
+}
+
+.footer {
+  background: #0092c4;
+  height: 28px;
+  padding: 10px;
+  text-align: center;
 }
