@@ -19,12 +19,18 @@ class Hall extends Component {
         rows: PropTypes.array.isRequired,
         movie: PropTypes.object.isRequired,
         loading: PropTypes.bool.isRequired,
+        id: PropTypes.string.isRequired,
 
         requestHall: PropTypes.func.isRequired,
     }
     constructor(props) {
         super(props)
-        this.state = { selected: [], purchaseDialogIsOpen: false }
+        const tickets = JSON.parse(localStorage.getItem('tickets'))
+        let selected = []
+        if (tickets && tickets[this.props.id]) {
+            selected = tickets[this.props.id]
+        }
+        this.state = { selected, purchaseDialogIsOpen: false }
     }
     componentWillMount() {
         this.props.requestHall()
@@ -42,24 +48,24 @@ class Hall extends Component {
         }
         window.setTimeout(() => {
             rowEl.classList.remove('inTransition')
-            this.setState({
-                selected: this.state.selected.filter((selectedItem) => selectedItem.id !== ticketId),
-            })
+            const selected = this.state.selected.filter((selectedItem) => selectedItem.id !== ticketId)
+            this.setState({ selected })
+            localStorage.setItem('tickets', JSON.stringify({ [this.props.id]: selected }))
         }, TRANSITION_TIMEOUT)
     }
     addTicket(row, sit) {
         const id = `${row.number}_${sit.number}`
-        this.setState({
-            selected: [
-                ...this.state.selected,
-                {
-                    id,
-                    row: row.number,
-                    sit: sit.number,
-                    price: sit.price,
-                },
-            ],
-        })
+        const selected = [
+            ...this.state.selected,
+            {
+                id,
+                row: row.number,
+                sit: sit.number,
+                price: sit.price,
+            },
+        ]
+        this.setState({ selected })
+        localStorage.setItem('tickets', JSON.stringify({ [this.props.id]: selected }))
         window.setTimeout(() => {
             const rowEl = this.refs['row-' + id]
             rowEl.classList.remove('total-row-inTransition')
@@ -162,7 +168,7 @@ class Hall extends Component {
                             label='Buy'
                             primary
                             onClick={handleBuy}
-                            buttonStyle={{width: '104px'}}
+                            buttonStyle={{ width: '104px' }}
                         />
                     </div>
                     <PurchaseDialog
@@ -176,7 +182,7 @@ class Hall extends Component {
     }
 }
 
-export const mapStateToProps = ({ hall }) => {
+export const mapStateToProps = ({ hall }, ownProps) => {
     const {
         movie,
         rows,
@@ -187,6 +193,7 @@ export const mapStateToProps = ({ hall }) => {
         rows,
         movie,
         loading,
+        id: ownProps.match.params.id,
     }
 }
 
