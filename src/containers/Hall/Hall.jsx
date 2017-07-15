@@ -62,10 +62,20 @@ class Hall extends Component {
                 row: row.number,
                 sit: sit.number,
                 price: sit.price,
+                transition: true,
+            },
+        ]
+        const selectedForLocalStorage = [
+            ...this.state.selected,
+            {
+                id,
+                row: row.number,
+                sit: sit.number,
+                price: sit.price,
             },
         ]
         this.setState({ selected })
-        localStorage.setItem('tickets', JSON.stringify({ [this.props.id]: selected }))
+        localStorage.setItem('tickets', JSON.stringify({ [this.props.id]: selectedForLocalStorage }))
         window.setTimeout(() => {
             const rowEl = this.refs['row-' + id]
             rowEl.classList.remove('total-row-inTransition')
@@ -110,8 +120,11 @@ class Hall extends Component {
             const handleClear = () => {
                 this.removeTicket(ticket.id)
             }
+            const rowClassNames = classNames('total-row', {
+                'total-row-inTransition': ticket.transition,
+            })
             return (
-                <div className='total-row total-row-inTransition'
+                <div className={rowClassNames}
                     key={`${ticket.row}_${ticket.sit}`}
                     ref={'row-' + ticket.id}
                 >
