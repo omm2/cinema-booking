@@ -3,6 +3,20 @@
   background: #4fc3f7;
   justify-content: center;
   padding: 10px;
+  position: relative;
+}
+
+.header-item-menu {
+  display: none;
+}
+
+.header-menu {
+  color: #fff;
+  cursor: pointer;
+
+  &:hover{
+      color: #0092c4;
+  }
 }
 
 .header-item {
@@ -27,9 +41,43 @@
   padding: 10px;
 }
 
+.submenu {
+    display: none;
+}
+
 @media screen and (max-width: 720px) {
   .header-item {
     display: none;
   }
+
+  .header-item-menu {
+    display: block;
+    position: absolute;
+    left: 10px;
+  }
+
+  .submenu-isOpened {
+    display: block;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: #4fc3f7;
+    top: 62px;
+    left: 0px;
+    z-index: 2;
+  }
+
+  .submenu-item {
+    color: #fff;
+    text-transform: uppercase;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+
+    &:hover{
+      background-color: #0092c4;
+    }
+  }
+
 }
 
