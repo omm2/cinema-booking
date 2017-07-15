@@ -25,10 +25,10 @@ class Hall extends Component {
     }
     constructor(props) {
         super(props)
-        const tickets = JSON.parse(localStorage.getItem('tickets'))
+        this.tickets = JSON.parse(localStorage.getItem('tickets'))
         let selected = []
-        if (tickets && tickets[this.props.id]) {
-            selected = tickets[this.props.id]
+        if (this.tickets && this.tickets[this.props.id]) {
+            selected = this.tickets[this.props.id]
         }
         this.state = { selected, purchaseDialogIsOpen: false }
     }
@@ -49,8 +49,18 @@ class Hall extends Component {
         window.setTimeout(() => {
             rowEl.classList.remove('inTransition')
             const selected = this.state.selected.filter((selectedItem) => selectedItem.id !== ticketId)
+
+            // remove transition:true
+            const selectedForLocalStorage = selected.map((selectedItem) => ({
+                id: selectedItem.id,
+                row: selectedItem.row,
+                sit: selectedItem.sit,
+                price: selectedItem.price,
+            }))
             this.setState({ selected })
-            localStorage.setItem('tickets', JSON.stringify({ [this.props.id]: selected }))
+            localStorage.setItem(
+                'tickets', JSON.stringify({ ...this.tickets, [this.props.id]: selectedForLocalStorage })
+            )
         }, TRANSITION_TIMEOUT)
     }
     addTicket(row, sit) {
@@ -65,17 +75,16 @@ class Hall extends Component {
                 transition: true,
             },
         ]
-        const selectedForLocalStorage = [
-            ...this.state.selected,
-            {
-                id,
-                row: row.number,
-                sit: sit.number,
-                price: sit.price,
-            },
-        ]
+
+        // remove transition:true
+        const selectedForLocalStorage = selected.map((selectedItem) => ({
+            id: selectedItem.id,
+            row: selectedItem.row,
+            sit: selectedItem.sit,
+            price: selectedItem.price,
+        }))
         this.setState({ selected })
-        localStorage.setItem('tickets', JSON.stringify({ [this.props.id]: selectedForLocalStorage }))
+        localStorage.setItem('tickets', JSON.stringify({ ...this.tickets, [this.props.id]: selectedForLocalStorage }))
         window.setTimeout(() => {
             const rowEl = this.refs['row-' + id]
             rowEl.classList.remove('total-row-inTransition')
