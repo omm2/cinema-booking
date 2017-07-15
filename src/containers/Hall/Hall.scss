@@ -84,6 +84,16 @@
   padding-top: 15px;
 }
 
+.rowNumber {
+  font-weight: bold;
+  color: #4fc2f7;
+  margin: 5px 5px 0 0;
+  padding: 6px;
+  line-height: 24px;
+  width: 15px;
+  height: 25px;
+}
+
 .sit {
   font-weight: bold;
   color: #fff;
@@ -121,19 +131,44 @@
     width: 20px;
     height: 30px;
   }
+
+  .rowNumber {
+    width: 20px;
+    height: 30px;
+  }
 }
 
 @media screen and (max-width: 600px) {
   .sit {
+    font-size: 12px;
     width: 15px;
-    height: 25px;
+    height: 20px;
+    padding: 2px;
+  }
+
+  .rowNumber {
+    font-size: 12px;
+    width: 15px;
+    height: 20px;
+    padding: 2px;
   }
 }
 
 @media screen and (max-width: 400px) {
   .sit {
-    width: 10px;
+    font-size: 10px;
+    width: 15px;
     height: 20px;
+    padding: 2px;
+    margin: 2px 2px 0 0;
+  }
+
+  .rowNumber {
+    font-size: 10px;
+    width: 15px;
+    height: 20px;
+    padding: 2px;
+    margin: 2px 2px 0 0;
   }
 }
 

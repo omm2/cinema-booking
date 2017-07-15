@@ -122,7 +122,12 @@ class Hall extends Component {
                 })
                 return <div className={sitClassName} key={sit.number} onClick={handleOnClick}>{sit.number}</div>
             })
-            return <div className='row' key={row.number}>{seats}</div>
+            return (
+                <div className='row' key={row.number}>
+                    <div className='rowNumber'>{row.number}</div>
+                    {seats}
+                </div>
+            )
         })
 
         const selected = this.state.selected.map((ticket) => {
