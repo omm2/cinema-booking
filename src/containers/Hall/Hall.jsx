@@ -172,7 +172,7 @@ class Hall extends Component {
                         <div className='total-header'>
                             <a href='/'>{`${this.props.movie.title} (${this.props.movie.certificate})`}</a>
                         </div>
-                        <div className='total-date'>{moment(this.props.movie.date).format('dddd, MMMM Do')}</div>
+                        <div className='total-date'>{moment(this.props.movie.date).format('dddd, MMMM Do, hh:mm')}</div>
                         <div className='total-type'>{'Format: '}<span>{this.props.movie.type}</span></div>
                         {
                             (ticketsSum === 0) &&
